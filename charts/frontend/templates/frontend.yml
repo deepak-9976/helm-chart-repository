@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend
+  namespace: frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: frontend
+  template:
+    metadata:
+      labels:
+        app: frontend
+    spec:
+      containers:
+        - image: ghcr.io/deepak-9976/recommendfrontend/rserver:0.3.0
+          imagePullPolicy: Always
+          name: frontend
+          ports:
+            - name: frontend
+              containerPort: 4201
+      imagePullSecrets:
+        - name: ghcr
+        
