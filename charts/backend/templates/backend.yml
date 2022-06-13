@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend
+  namespace: backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: backend
+  template:
+    metadata:
+      labels:
+        app: backend
+    spec:
+      containers:
+        - image: ghcr.io/deepak-9976/recommendbackend/recommendbackend:v1.3
+          imagePullPolicy: Always
+          name: backend
+          ports:
+            - name: backend
+              containerPort: 8080
+      imagePullSecrets:
+        - name: ghcr

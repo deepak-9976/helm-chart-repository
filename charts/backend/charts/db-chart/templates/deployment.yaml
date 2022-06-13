@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    application: {{ .Release.Name }}-db
+  name: db-database
+  namespace: backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      application: {{ .Release.Name }}-db
+  template:
+    metadata:
+      labels:
+        application: {{ .Release.Name }}-db
+    spec:
+      containers:
+      - image: {{ .Values.container.image.repository}}/{{ .Values.container.image.name }}:{{ .Values.container.image.tag }}
+        name: {{ .Values.container.image.name }}
+        ports:
+        - name: database-port
+          containerPort: {{ .Values.container.port.database }}
+      imagePullSecrets:
+        - name: ghcr

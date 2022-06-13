@@ -1,0 +1,11 @@
+apiVersion: v2
+name: backend
+appVersion: "2.0"
+description: A Helm chart for Rserver Backend 2.0
+version: 1.1.0
+type: application
+
+dependencies:
+  - name: db-chart
+    version: 1.1.0
+    condition: db-chart.enabled
